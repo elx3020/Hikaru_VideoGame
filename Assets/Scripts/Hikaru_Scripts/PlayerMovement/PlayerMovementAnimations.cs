@@ -48,7 +48,7 @@ public class PlayerMovementAnimations : MonoBehaviour
     {
         //Update the Animator with the appropriate values
         anim.SetBool(hangingParamID, movement.isHanging);
-        anim.SetBool(wallParamID, movement.canWallJump);
+        anim.SetBool(wallParamID, movement.wallGrab);
         anim.SetBool(groundParamID, movement.isOnGround);
         anim.SetFloat(fallParamID, rigidBody.velocity.y);
 
