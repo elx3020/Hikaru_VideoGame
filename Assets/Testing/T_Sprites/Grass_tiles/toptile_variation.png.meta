@@ -38,6 +38,33 @@ TextureImporter:
   - first:
       213: 5978862321703337593
     second: toptile_variation_11
+  - first:
+      213: -8532031398735871964
+    second: toptile_variation_0
+  - first:
+      213: -1117057792914118664
+    second: toptile_variation_1
+  - first:
+      213: 2297306072832950861
+    second: toptile_variation_2
+  - first:
+      213: 618877258910807413
+    second: toptile_variation_3
+  - first:
+      213: -1504407234544167058
+    second: toptile_variation_4
+  - first:
+      213: 5872315201245082346
+    second: toptile_variation_5
+  - first:
+      213: 4474089683836241215
+    second: toptile_variation_6
+  - first:
+      213: 8480579986987920770
+    second: toptile_variation_7
+  - first:
+      213: -8638635327315543463
+    second: toptile_variation_8
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -161,8 +188,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f4f15102190d232b0800000000000000
-      internalID: -5606189264395755697
+      spriteID: 4208ed1c5a2289980800000000000000
+      internalID: -8532031398735871964
       vertices: []
       indices: 
       edges: []
@@ -182,8 +209,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5a6bf6e1bb034f240800000000000000
-      internalID: 4824534681048299173
+      spriteID: 8f7a5c31bd96f70f0800000000000000
+      internalID: -1117057792914118664
       vertices: []
       indices: 
       edges: []
@@ -203,8 +230,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7fa2947a875910c30800000000000000
-      internalID: 4323901462687591159
+      spriteID: d424e8b93bba1ef10800000000000000
+      internalID: 2297306072832950861
       vertices: []
       indices: 
       edges: []
@@ -224,8 +251,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 91356d7b353fb7780800000000000000
-      internalID: -8684079915561757927
+      spriteID: 57532f88691b69800800000000000000
+      internalID: 618877258910807413
       vertices: []
       indices: 
       edges: []
@@ -245,8 +272,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 08b4d7df1ca6b0d50800000000000000
-      internalID: 6704569851685194624
+      spriteID: e67977347954f1be0800000000000000
+      internalID: -1504407234544167058
       vertices: []
       indices: 
       edges: []
@@ -266,8 +293,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b576f1d1e41450530800000000000000
-      internalID: 3820531662645585755
+      spriteID: ae2f65b0097ae7150800000000000000
+      internalID: 5872315201245082346
       vertices: []
       indices: 
       edges: []
@@ -287,8 +314,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 33b1d49bcac7a4aa0800000000000000
-      internalID: -6175986857700156621
+      spriteID: f358c4adcd8271e30800000000000000
+      internalID: 4474089683836241215
       vertices: []
       indices: 
       edges: []
@@ -308,8 +335,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2b39826e97173ab10800000000000000
-      internalID: 1991560228594291634
+      spriteID: 28da3bde09211b570800000000000000
+      internalID: 8480579986987920770
       vertices: []
       indices: 
       edges: []
@@ -329,71 +356,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d641af7aaa8f39150800000000000000
-      internalID: 5878315350494942317
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: toptile_variation_9
-      rect:
-        serializedVersion: 2
-        x: 99
-        y: 0
-        width: 11
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 66d3399efa79d9020800000000000000
-      internalID: 2350201362351078758
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: toptile_variation_10
-      rect:
-        serializedVersion: 2
-        x: 110
-        y: 0
-        width: 11
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9ce4e472b1b5dea00800000000000000
-      internalID: 787385682041392841
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: toptile_variation_11
-      rect:
-        serializedVersion: 2
-        x: 121
-        y: 0
-        width: 11
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 97e381eaa9f29f250800000000000000
-      internalID: 5978862321703337593
+      spriteID: 95a773370f66d1880800000000000000
+      internalID: -8638635327315543463
       vertices: []
       indices: 
       edges: []
