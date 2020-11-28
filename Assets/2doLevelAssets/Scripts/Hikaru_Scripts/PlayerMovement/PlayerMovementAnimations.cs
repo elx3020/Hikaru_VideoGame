@@ -33,7 +33,7 @@ public class PlayerMovementAnimations : MonoBehaviour
         movement = GetComponent<PlayerMovement>();
         rigidBody = GetComponent<Rigidbody2D>();
         input = GetComponent<PlayerMovementInput>();
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
 
         //If any of the needed components don't exist...
         if (movement == null || rigidBody == null || input == null || anim == null)
@@ -47,8 +47,8 @@ public class PlayerMovementAnimations : MonoBehaviour
     void Update()
     {
         //Update the Animator with the appropriate values
-        anim.SetBool(hangingParamID, movement.isHanging);
-        anim.SetBool(wallParamID, movement.wallGrab);
+        //anim.SetBool(hangingParamID, movement.isHanging);
+        //anim.SetBool(wallParamID, movement.wallGrab);
         anim.SetBool(groundParamID, movement.isOnGround);
         anim.SetFloat(fallParamID, rigidBody.velocity.y);
 

@@ -178,7 +178,7 @@ public class PlayerMovement : MonoBehaviour
         if (isOnGround)
         {
             coyoteTime = Time.time + coyoteDuration;
-            
+            isJumping = false;
         }
 
         if (!isFacingWall)
@@ -201,7 +201,7 @@ public class PlayerMovement : MonoBehaviour
 
         void GroundTouch()
         {
-            isJumping = false;
+            
 
         }
 
