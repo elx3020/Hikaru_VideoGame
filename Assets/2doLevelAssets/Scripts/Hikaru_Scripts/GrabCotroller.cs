@@ -65,6 +65,12 @@ public class GrabCotroller : MonoBehaviour
 
 
 
+        if(grabbedobject != null)
+        {
+            grabbedobject.GetComponent<Transform>().transform.localScale = new Vector3(playerCheck.direction, 1f, 1f);
+        }
+
+
 
         if (Input.GetButtonDown("Grab") && !isGrabing && posibleGrab)
         {
@@ -72,27 +78,35 @@ public class GrabCotroller : MonoBehaviour
             sizeObject = grabbedobject.GetComponent<SpriteRenderer>().bounds.size;
             playerSize = playerSprite.bounds.size;
             Vector2 targetPosition = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + (playerSize.y / 2) + (sizeObject.y / 2) - smallAmount);
+            grabbedobject.GetComponent<Collider2D>().enabled = false;
             //grabbedobject.transform.position = objectHolder.position;
             grabbedobject.transform.position = targetPosition;
+            grabbedobject.GetComponentInChildren<VFXIObjects>().isGrabbed = true;
             grabbedobject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             grabbedobject.GetComponent<FixedJoint2D>().enabled = true;
             grabbedobject.GetComponent<FixedJoint2D>().connectedBody = rigidBody;
+            
             Invoke("Grab", 0.1f);
         }
 
-        if (Input.GetButtonDown("Grab") && isGrabing)
+        if (Input.GetButtonDown("Grab") && isGrabing && !playerCheck.isFacingWall)
         {
             //grabbedobject.transform.position = grabPoint.position;
             grabbedobject.GetComponent<FixedJoint2D>().enabled = false;
             grabbedobject.GetComponent<FixedJoint2D>().connectedBody = null;
             grabbedobject.GetComponent<Rigidbody2D>().AddForce(new Vector2(playerCheck.horizontal, playerCheck.vertical) * throwForce, ForceMode2D.Impulse);
+            grabbedobject.GetComponent<Collider2D>().enabled = true;
+            grabbedobject.GetComponentInChildren<VFXIObjects>().isGrabbed = false;
             grabbedobject = null;
             isGrabing = false;
         }else if(Input.GetButtonDown("Drop") && isGrabing && !playerCheck.isFacingWall)
         {
-            grabbedobject.transform.position = grabPoint.position;
+            Vector2 leavePosition = new Vector2(gameObject.transform.position.x + ((playerSize.x + sizeObject.x / 4f) * playerCheck.direction), gameObject.transform.position.y + ((sizeObject.x - playerSize.x) / 2));
+            grabbedobject.transform.position = leavePosition;
             grabbedobject.GetComponent<FixedJoint2D>().enabled = false;
             grabbedobject.GetComponent<FixedJoint2D>().connectedBody = null;
+            grabbedobject.GetComponent<Collider2D>().enabled = true;
+            grabbedobject.GetComponentInChildren<VFXIObjects>().isGrabbed = false;
             grabbedobject = null;
             isGrabing = false;
         }

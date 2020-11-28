@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Spike
   m_EditorClassIdentifier: 
   m_Cells:
-  - m_Tile: {fileID: 0}
+  - m_Tile: {fileID: 11400000, guid: 136015bd297ab5f489f666c49b4337ad, type: 2}
     m_Matrix:
       e00: 1
       e01: 0
@@ -38,6 +38,4 @@ MonoBehaviour:
   m_Anchor: {x: 0.5, y: 0.5, z: 0.5}
   m_Prefabs:
   - {fileID: 484005725663378851, guid: b2b3a6387ddff2f49a0629ee3c4c9e40, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
   m_PerlinScale: 0.5
