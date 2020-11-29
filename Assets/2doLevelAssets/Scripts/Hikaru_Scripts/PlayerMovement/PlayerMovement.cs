@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     public float groundDistance = .2f;      //Distance player is considered to be on the ground
     public float grabDistance = .4f;        //The reach distance for wall grabs
     public LayerMask groundLayer;           //Layer of the ground
+    public LayerMask wallLayer;
     [Space]
     [Header("Input Check")]
     public float horizontal;
@@ -42,10 +43,13 @@ public class PlayerMovement : MonoBehaviour
     [Header("Event Flags")]
     public bool groundTouch;
     public bool canMove = true;
+    //references
+    InteractCotroller playerInteract;
     PlayerMovementInput input;              //The current inputs for the player
     CapsuleCollider2D bodyCollider;         //The collider component
     Rigidbody2D rigidBody;                  //The rigidbody component
     PlayerStats stats;
+    public ParticleSystem jumpParticles;
 
     float jumpTime;                         //Variable to hold jump duration
     float coyoteTime;                       //Variable to hold coyote duration
@@ -62,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         bodyCollider = GetComponent<CapsuleCollider2D>();
         stats = GetComponent<PlayerStats>();
-        
+        playerInteract = GetComponent<InteractCotroller>();
 
         //Record the original x scale of the player
         originalXScale = transform.localScale.x;
@@ -72,12 +76,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (canMove) {
-            VerticalMovement();
-            GroundMovement();
-            WallGrab();
-            MidAirMovement();
-        }
+        
        
         //Process ground and air movements
         
@@ -86,9 +85,16 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        
-        //Check the environment to determine status
         PhysicsCheck();
+        if (canMove)
+        {
+            VerticalMovement();
+            GroundMovement();
+            WallGrab();
+            MidAirMovement();
+        }
+        //Check the environment to determine status
+        
     }
 
     void PhysicsCheck()
@@ -116,16 +122,15 @@ public class PlayerMovement : MonoBehaviour
         
         //Wall and Ledge Check
         // Use a rays to know if first player is facing a wall
-        RaycastHit2D wallCheck = Raycast(new Vector2(footOffset * direction, bodyPosition), grabDir, grabDistance);
+        RaycastHit2D wallCheck = Raycast(new Vector2(footOffset * direction, bodyPosition), grabDir, grabDistance,wallLayer);
         isFacingWall = wallCheck;
+        
+        
         //Use another ray at the head position to know if a ledge is reached
         RaycastHit2D ledgeCheck = Raycast(new Vector2(footOffset * direction, headPosition.y), grabDir, grabDistance);
         if(isFacingWall)
         ledgeReach = !ledgeCheck;
-        
-
-    
-
+       
         
 
         //RaycastHit2D middle_wallJumCheck = Raycast(new Vector2(footOffset * direction, 0f), grabDir, wallJumpDistance);
@@ -152,21 +157,27 @@ public class PlayerMovement : MonoBehaviour
         
 
         //If currently hanging, the player can't move to exit
-        if (isHanging || wallGrab)
+        if (isHanging || wallGrab || playerInteract.isAiming)
             return;
 
+        float xVelocity = stats.speed * input.horizontal;
+        //float xVelocity = speed * direction;
 
+        //If the sign of the velocity and direction don't match, flip the character
+        if (xVelocity * direction < 0f)
+            FlipCharacterDirection();
         //Calculate the desired velocity based on inputs
-        
-            float xVelocity = stats.speed * input.horizontal;
-            //float xVelocity = speed * direction;
-
-            //If the sign of the velocity and direction don't match, flip the character
-            if (xVelocity * direction < 0f)
-                FlipCharacterDirection();
-
+       
+        if (!isFacingWall)
+        {
             //Apply the desired velocity 
             rigidBody.velocity = new Vector2(xVelocity, rigidBody.velocity.y);
+        }
+        else
+        {
+            rigidBody.velocity = new Vector2(0f,rigidBody.velocity.y);
+        }
+            
        
         
        
@@ -201,8 +212,8 @@ public class PlayerMovement : MonoBehaviour
 
         void GroundTouch()
         {
-            
 
+            jumpParticles.Play();
         }
 
 
@@ -215,7 +226,7 @@ public class PlayerMovement : MonoBehaviour
     {
         vertical = input.vertical;
 
-        if (isOnGround || !wallGrab) return;
+        if (isOnGround || !wallGrab || playerInteract.isGrabing) return;
 
         //float xVelocity = speed * direction;
         float yVelocity = stats.speed * input.vertical;
@@ -238,6 +249,9 @@ public class PlayerMovement : MonoBehaviour
 
     void WallGrab()
     {
+        //if (playerInteract.isGrabing) 
+        //    return;
+
         if (!wallGrab && isFacingWall && rigidBody.velocity.y <= 1 && input.wallHold)
         {
 
@@ -274,6 +288,7 @@ public class PlayerMovement : MonoBehaviour
 
             //...and tell the Audio Manager to play the jump audio
             //AudioManager.PlayJumpAudio();
+            jumpParticles.Play();
         }
        
         //If jump is pressed and can wall jump with coyote time

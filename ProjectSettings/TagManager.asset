@@ -6,6 +6,7 @@ TagManager:
   tags:
   - IObjects
   - VFX
+  - HealthBar
   layers:
   - Default
   - TransparentFX
@@ -17,8 +18,8 @@ TagManager:
   - 
   - Ground
   - Interactive_Objects
-  - 
-  - 
+  - Ground_Objects
+  - Characters
   - 
   - 
   - 

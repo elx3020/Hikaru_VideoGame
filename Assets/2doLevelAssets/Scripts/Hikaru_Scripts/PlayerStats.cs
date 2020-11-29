@@ -32,6 +32,10 @@ public class PlayerStats : CharacterStats
     PlayerAttackInput input;
 
     // Start is called before the first frame update
+    private void Awake()
+    {
+        healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<HealthBar>();
+    }
     void Start()
     {
         rbPlayer = GetComponent<Rigidbody2D>();
@@ -40,7 +44,7 @@ public class PlayerStats : CharacterStats
         input = GetComponent<PlayerAttackInput>();
         movement = GetComponent<PlayerMovement>();
         attack = GetComponent<PlayerAttack>();
-        healthBar.SetMaxHealth(maxHealth);
+        //healthBar.SetMaxHealth(maxHealth);
         shakeCamera = GetComponent<CinemachineImpulseSource>();
     }
 
