@@ -43,7 +43,7 @@ public class InteractCotroller : MonoBehaviour
 
         LookingDirection();
         Aim();
-        Invoke("Grabbing",0.05f);
+        Grabbing();
         Throw();
 
         //if(objectGrab.collider != null && objectGrab.collider.tag == "IObjects")

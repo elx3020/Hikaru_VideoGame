@@ -12,6 +12,7 @@ public class PlayerMovementAnimations : MonoBehaviour
     Rigidbody2D rigidBody;      //Reference to the Rigidbody2D component
     PlayerMovementInput input;          //Reference to the PlayerInput script component
     Animator anim;              //Reference to the Animator component
+    CharacterAudioManager characterAudio; //Reference to the AudioManager component
 
     int hangingParamID;         //ID of the isHanging parameter
     int groundParamID;          //ID of the isOnGround parameter
@@ -19,6 +20,9 @@ public class PlayerMovementAnimations : MonoBehaviour
     int speedParamID;           //ID of the speed parameter
     int fallParamID;            //ID of the verticalVelocity parameter
     int wallParamID;
+
+
+    public bool isWalking;
 
     void Start()
     {
@@ -30,11 +34,11 @@ public class PlayerMovementAnimations : MonoBehaviour
         fallParamID = Animator.StringToHash("verticalVelocity");
         wallParamID = Animator.StringToHash("IsinWall"); 
         //Get references to the needed components
-        movement = GetComponent<PlayerMovement>();
-        rigidBody = GetComponent<Rigidbody2D>();
-        input = GetComponent<PlayerMovementInput>();
-        anim = GetComponentInChildren<Animator>();
-
+        movement = GetComponentInParent<PlayerMovement>();
+        rigidBody = GetComponentInParent<Rigidbody2D>();
+        input = GetComponentInParent<PlayerMovementInput>();
+        anim = GetComponent<Animator>();
+        characterAudio = GetComponentInParent<CharacterAudioManager>();
         //If any of the needed components don't exist...
         if (movement == null || rigidBody == null || input == null || anim == null)
         {
@@ -54,14 +58,25 @@ public class PlayerMovementAnimations : MonoBehaviour
 
         //Use the absolute value of speed so that we only pass in positive numbers
         anim.SetFloat(speedParamID, Mathf.Abs(rigidBody.velocity.x));
+
+
+
+        
+
     }
 
 
-    //EVENTS OF THE ANIMATIONS 
-    //This method is called from events in the animation itself. This keeps the footstep
-    //sounds in sync with the visuals
+
+
+
+
     public void StepAudio()
     {
+        int step = Random.Range(1, 3); ;
+        characterAudio.SoundPlay("FootSteps" + step.ToString());
+
+      
+
         //Tell the Audio Manager to play a footstep sound
         //AudioManager.PlayFootstepAudio();
     }

@@ -36,12 +36,12 @@ public class PlayerMovement : MonoBehaviour
     public bool isHanging;                  //Is player hanging?
     public bool isHeadBlocked;
     public bool isFacingWall;
-    public bool isWallJumping;
     public bool wallGrab;
     public bool ledgeReach;
     [Space]
     [Header("Event Flags")]
     public bool groundTouch;
+    public bool wallTouch;
     public bool canMove = true;
     //references
     InteractCotroller playerInteract;
@@ -49,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
     CapsuleCollider2D bodyCollider;         //The collider component
     Rigidbody2D rigidBody;                  //The rigidbody component
     PlayerStats stats;
+    CharacterAudioManager characterAudio;
     public ParticleSystem jumpParticles;
 
     float jumpTime;                         //Variable to hold jump duration
@@ -67,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
         bodyCollider = GetComponent<CapsuleCollider2D>();
         stats = GetComponent<PlayerStats>();
         playerInteract = GetComponent<InteractCotroller>();
-
+        characterAudio = GetComponent<CharacterAudioManager>();
         //Record the original x scale of the player
         originalXScale = transform.localScale.x;
 
@@ -181,10 +182,8 @@ public class PlayerMovement : MonoBehaviour
        
         
        
-
+        
         //If the player is on the ground, extend the coyote time window
-
-
 
         if (isOnGround)
         {
@@ -192,11 +191,8 @@ public class PlayerMovement : MonoBehaviour
             isJumping = false;
         }
 
-        if (!isFacingWall)
-        {
-            isWallJumping = false;
-        }
-
+    
+        
         if (isOnGround && !groundTouch)
         {
             GroundTouch();
@@ -209,11 +205,12 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-
+        //Ground touch event
         void GroundTouch()
         {
 
             jumpParticles.Play();
+            characterAudio.SoundPlay("Jump_Drop");
         }
 
 
@@ -266,9 +263,29 @@ public class PlayerMovement : MonoBehaviour
             rigidBody.gravityScale = 5;
 
         }
+
+        if(isFacingWall && !wallTouch && !isOnGround)
+        {
+            WallTouch();
+            wallTouch = true;
+        }else if (!isFacingWall && wallTouch)
+        {
+            wallTouch = false;
+        }
+
+        void WallTouch()
+        {
+            //Particle effects for enter and leaving the walls
+            //same as sounds
+
+        }
     }
 
-    
+
+
+
+
+   
 
 
 
@@ -312,7 +329,6 @@ public class PlayerMovement : MonoBehaviour
             }
 
             //...and exit
-            isWallJumping = true;
             wallGrab = false;
             canMove = false;
             rigidBody.gravityScale = 5;

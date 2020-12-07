@@ -283,9 +283,9 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     startSize:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0.25
-      minScalar: 1
+      minMaxState: 3
+      scalar: 0.35
+      minScalar: 0.2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -336,7 +336,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -389,7 +389,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -1542,12 +1542,12 @@ ParticleSystem:
     flipU: 0
     flipV: 0
   VelocityModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0
-      minScalar: 0
+      minMaxState: 3
+      scalar: 1
+      minScalar: -1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1598,7 +1598,7 @@ ParticleSystem:
         m_RotationOrder: 4
     y:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -1651,7 +1651,7 @@ ParticleSystem:
         m_RotationOrder: 4
     z:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -2128,12 +2128,12 @@ ParticleSystem:
         m_RotationOrder: 4
     inWorldSpace: 0
   InheritVelocityModule:
-    enabled: 0
+    enabled: 1
     m_Mode: 0
     m_Curve:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0
+      minMaxState: 3
+      scalar: 0.1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -4859,8 +4859,8 @@ GameObject:
   - component: {fileID: 4019584451978745771}
   - component: {fileID: 4019584451978745774}
   - component: {fileID: 4019584451978745768}
-  - component: {fileID: 4019584451978745769}
   - component: {fileID: 4019584451978745750}
+  - component: {fileID: 1178835151}
   m_Layer: 11
   m_Name: HIKARU
   m_TagString: Player
@@ -4925,10 +4925,10 @@ MonoBehaviour:
   isHanging: 0
   isHeadBlocked: 0
   isFacingWall: 0
-  isWallJumping: 0
   wallGrab: 0
   ledgeReach: 0
   groundTouch: 0
+  wallTouch: 0
   canMove: 1
   jumpParticles: {fileID: 6844289480548102922}
   direction: 1
@@ -5030,7 +5030,7 @@ MonoBehaviour:
   playerSprite: {fileID: 4019584452974909329}
   grabbedobject: {fileID: 0}
   grabPoint: {fileID: 4019584451851938295}
-  radius: 0.25
+  radius: 0.3
   isGrabing: 0
   posibleGrab: 0
   isAiming: 0
@@ -5104,18 +5104,6 @@ MonoBehaviour:
     m_DirectionMode: 0
     m_DissipationMode: 2
     m_DissipationDistance: 1000
---- !u!114 &4019584451978745769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4019584451978745763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 334041506547fe049b59ff9f9cb5a2ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4019584451978745750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5137,7 +5125,48 @@ MonoBehaviour:
   horizontal: 0
   vertical: 0
   aim: 0
-  threshold: 0.4
+  threshold: 0.3
+--- !u!114 &1178835151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4019584451978745763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8815e43bd84a78e498f504453841da34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: FootSteps1
+    clip: {fileID: 8300000, guid: d6f6dd37dca92d14a9d9a392b0387912, type: 3}
+    volumen: 0.16
+    pitch: 1
+    loop: 0
+    playOnAwake: 1
+    source: {fileID: 0}
+  - name: FootSteps2
+    clip: {fileID: 8300000, guid: 59d4f2d4d659dfe4f8022011bbd69337, type: 3}
+    volumen: 0.16
+    pitch: 1
+    loop: 0
+    playOnAwake: 1
+    source: {fileID: 0}
+  - name: FootSteps3
+    clip: {fileID: 8300000, guid: 64c0db085a372c04a971b9f687ff5fbe, type: 3}
+    volumen: 0.16
+    pitch: 1
+    loop: 0
+    playOnAwake: 1
+    source: {fileID: 0}
+  - name: Jump_Drop
+    clip: {fileID: 8300000, guid: 5be343335d413c147b7ccba63f4bc71f, type: 3}
+    volumen: 0.47
+    pitch: 0.8
+    loop: 0
+    playOnAwake: 1
+    source: {fileID: 0}
 --- !u!1 &4019584452084690800
 GameObject:
   m_ObjectHideFlags: 0
@@ -5329,6 +5358,7 @@ GameObject:
   - component: {fileID: 4019584452974909328}
   - component: {fileID: 4019584452974909329}
   - component: {fileID: 4019584452974909342}
+  - component: {fileID: 1134214147}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
@@ -5421,6 +5451,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1134214147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4019584452974909331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 334041506547fe049b59ff9f9cb5a2ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isWalking: 0
 --- !u!1 &4019584453103279092
 GameObject:
   m_ObjectHideFlags: 0
@@ -5468,14 +5511,14 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.632
   m_Color: {r: 0.2028302, g: 0.71331376, b: 1, a: 1}
-  m_Intensity: 0.4
+  m_Intensity: 0.35
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: c102155561c52fa1eda6ecb4
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
   m_AlphaBlendOnOverlap: 0
-  m_ShadowIntensity: 0.662
+  m_ShadowIntensity: 0.5
   m_ShadowVolumeIntensity: 0
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
